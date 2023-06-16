@@ -281,7 +281,7 @@ export const useChatStore = create<ChatStore>()(
         console.log("[User Input 这里] ", sendMessages);
         api.llm.chat({
           messages: sendMessages,
-          config: { ...modelConfig, stream: false },
+          config: { ...modelConfig, stream: true },
           onUpdate(message) {
             botMessage.streaming = true;
             if (message) {
@@ -494,7 +494,7 @@ export const useChatStore = create<ChatStore>()(
               content: Locale.Store.Prompt.Summarize,
               date: "",
             }),
-            config: { ...modelConfig, stream: false },
+            config: { ...modelConfig, stream: true },
             onUpdate(message) {
               session.memoryPrompt = message;
             },
