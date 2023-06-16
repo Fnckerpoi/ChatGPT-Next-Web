@@ -31,6 +31,7 @@ async function handle(
     );
   }
 
+  //权限验证实现
   const authResult = auth(req);
   if (authResult.error) {
     return NextResponse.json(authResult, {
@@ -38,6 +39,7 @@ async function handle(
     });
   }
 
+  //发送请求
   try {
     return await requestOpenai(req);
   } catch (e) {

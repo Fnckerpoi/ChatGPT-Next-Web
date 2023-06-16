@@ -278,10 +278,10 @@ export const useChatStore = create<ChatStore>()(
         });
 
         // make request
-        console.log("[User Input] ", sendMessages);
+        console.log("[User Input 这里] ", sendMessages);
         api.llm.chat({
           messages: sendMessages,
-          config: { ...modelConfig, stream: true },
+          config: { ...modelConfig, stream: false },
           onUpdate(message) {
             botMessage.streaming = true;
             if (message) {
@@ -487,13 +487,14 @@ export const useChatStore = create<ChatStore>()(
           historyMsgLength > modelConfig.compressMessageLengthThreshold &&
           modelConfig.sendMemory
         ) {
+          console.log("怎么说？");
           api.llm.chat({
             messages: toBeSummarizedMsgs.concat({
               role: "system",
               content: Locale.Store.Prompt.Summarize,
               date: "",
             }),
-            config: { ...modelConfig, stream: true },
+            config: { ...modelConfig, stream: false },
             onUpdate(message) {
               session.memoryPrompt = message;
             },
