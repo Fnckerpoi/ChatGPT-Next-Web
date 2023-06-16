@@ -506,22 +506,23 @@ export function Settings() {
           {/*  <></>*/}
           {/*)}*/}
 
-          {!accessStore.hideUserApiKey ? (
-            <ListItem
-              title={Locale.Settings.Token.Title}
-              subTitle={Locale.Settings.Token.SubTitle}
-            >
-              <PasswordInput
-                value={accessStore.token}
-                type="text"
-                placeholder={Locale.Settings.Token.Placeholder}
-                onChange={(e) => {
-                  accessStore.updateToken(e.currentTarget.value);
-                }}
-              />
-            </ListItem>
-          ) : null}
+          {/*{!accessStore.hideUserApiKey ? (*/}
+          {/*  <ListItem*/}
+          {/*    title={Locale.Settings.Token.Title}*/}
+          {/*    subTitle={Locale.Settings.Token.SubTitle}*/}
+          {/*  >*/}
+          {/*    <PasswordInput*/}
+          {/*      value={accessStore.token}*/}
+          {/*      type="text"*/}
+          {/*      placeholder={Locale.Settings.Token.Placeholder}*/}
+          {/*      onChange={(e) => {*/}
+          {/*        accessStore.updateToken(e.currentTarget.value);*/}
+          {/*      }}*/}
+          {/*    />*/}
+          {/*  </ListItem>*/}
+          {/*) : null}*/}
 
+          {/*TODO:这里改为从后端查获余额和订阅到期*/}
           <ListItem
             title={Locale.Settings.Usage.Title}
             subTitle={
