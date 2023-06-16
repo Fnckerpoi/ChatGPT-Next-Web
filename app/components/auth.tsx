@@ -28,6 +28,7 @@ export function AuthPage() {
         type="password"
         placeholder={Locale.Auth.Input}
         value={access.accessCode}
+        //TODO：这里改为账号密码输入，并请求后端鉴权，将token输入到REDIS中
         onChange={(e) => {
           access.updateCode(e.currentTarget.value);
         }}
