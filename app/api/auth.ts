@@ -46,7 +46,7 @@ export function auth(req: NextRequest) {
   }
   console.log("{ accessCode, apiKey: token }", { accessCode, apiKey: token });
   // if user does not provide an api key, inject system api key
-  if (token) {
+  if (!token) {
     //TODO：从这里向后端接口请求获取api key，提供本地缓存的Token
     const apiKey = serverConfig.apiKey;
     console.log("apiKey:", apiKey);
