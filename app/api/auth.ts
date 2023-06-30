@@ -16,7 +16,8 @@ function getIP(req: NextRequest) {
 
 function parseApiKey(bearToken: string) {
   const token = bearToken.trim().replaceAll("Bearer ", "").trim();
-  const isOpenAiKey = token.startsWith(ACCESS_CODE_PREFIX);
+  const isOpenAiKey = !token.startsWith(ACCESS_CODE_PREFIX);
+  console.log("isOpenAiKey？", isOpenAiKey);
   return {
     accessCode: isOpenAiKey ? "" : token.slice(ACCESS_CODE_PREFIX.length),
     apiKey: isOpenAiKey ? token : "",
@@ -43,7 +44,7 @@ export function auth(req: NextRequest) {
       msg: !accessCode ? "empty access code" : "wrong access code",
     };
   }
-
+  console.log("{ accessCode, apiKey: token }", { accessCode, apiKey: token });
   // if user does not provide an api key, inject system api key
   if (token) {
     //TODO：从这里向后端接口请求获取api key，提供本地缓存的Token
