@@ -492,11 +492,11 @@ export function ChatActions(props: {
         }}
       />
 
-      <ChatAction
-        onClick={() => setShowModelSelector(true)}
-        text={currentModel}
-        icon={<RobotIcon />}
-      />
+      {/*<ChatAction*/}
+      {/*  onClick={() => setShowModelSelector(true)}*/}
+      {/*  text={currentModel}*/}
+      {/*  icon={<RobotIcon />}*/}
+      {/*/>*/}
 
       {showModelSelector && (
         <Selector
