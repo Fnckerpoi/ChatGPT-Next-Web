@@ -1,17 +1,39 @@
-import { ModalConfigValidator, ModelConfig, useAppConfig } from "../store";
+import { ModalConfigValidator, ModelConfig } from "../store";
 
 import Locale from "../locales";
 import { InputRange } from "./input-range";
 import { ListItem, Select } from "./ui-lib";
+import { useAllModels } from "../utils/hooks";
 
 export function ModelConfigList(props: {
   modelConfig: ModelConfig;
   updateConfig: (updater: (config: ModelConfig) => void) => void;
 }) {
-  const config = useAppConfig();
+  const allModels = useAllModels();
 
   return (
     <>
+      <ListItem title={Locale.Settings.Model}>
+        <Select
+          value={props.modelConfig.model}
+          onChange={(e) => {
+            props.updateConfig(
+              (config) =>
+                (config.model = ModalConfigValidator.model(
+                  e.currentTarget.value,
+                )),
+            );
+          }}
+        >
+          {allModels
+            .filter((v) => v.available)
+            .map((v, i) => (
+              <option value={v.name} key={i}>
+                {v.displayName}
+              </option>
+            ))}
+        </Select>
+      </ListItem>
       <ListItem
         title={Locale.Settings.Temperature.Title}
         subTitle={Locale.Settings.Temperature.SubTitle}
@@ -56,8 +78,8 @@ export function ModelConfigList(props: {
       >
         <input
           type="number"
-          min={100}
-          max={32000}
+          min={1024}
+          max={512000}
           value={props.modelConfig.max_tokens}
           onChange={(e) =>
             props.updateConfig(
@@ -150,7 +172,7 @@ export function ModelConfigList(props: {
           title={props.modelConfig.historyMessageCount.toString()}
           value={props.modelConfig.historyMessageCount}
           min="0"
-          max="32"
+          max="64"
           step="1"
           onChange={(e) =>
             props.updateConfig(
