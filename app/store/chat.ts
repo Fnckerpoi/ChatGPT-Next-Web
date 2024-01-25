@@ -310,6 +310,7 @@ export const useChatStore = createPersistStore(
         }
 
         // make request
+        console.log("[User Input 这里] ", sendMessages);
         api.llm.chat({
           messages: sendMessages,
           config: { ...modelConfig, stream: true },
@@ -557,6 +558,7 @@ export const useChatStore = createPersistStore(
           historyMsgLength > modelConfig.compressMessageLengthThreshold &&
           modelConfig.sendMemory
         ) {
+          console.log("怎么说？");
           api.llm.chat({
             messages: toBeSummarizedMsgs.concat(
               createMessage({
